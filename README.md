@@ -23,10 +23,25 @@ checks specific to a given context.
 
 | Folder | Purpose |
 |---|---|
-| [`general-skills/`](./general-skills) | Context-agnostic skills used in every project: research planning, source verification, structured extraction, comparison/scoring, and final QA. |
-| [`finance-skills/`](./finance-skills) | Investment and financial research: company/sector analysis, valuation context, bull/bear cases, evidence logging. |
-| [`tourism-skills/`](./tourism-skills) | Travel and itinerary research: destination discovery, comparison of transport/lodging, visa and safety checks. |
-| [`commercial-skills/`](./commercial-skills) | Vendor, supplier, and general commercial/product research and decision support. |
+| [`general-skills/`](./general-skills) | Context-agnostic skills used in every project: research planning, source verification, structured extraction, comparison/scoring, and final QA. Skills only — no agent here, since it's meant to be reused inside every domain agent below. |
+| [`finance-skills/`](./finance-skills) | Investment and financial research: company/sector analysis, valuation context, bull/bear cases, evidence logging, plus the **Investment Research Agent**. |
+| [`tourism-skills/`](./tourism-skills) | Travel and itinerary research: destination discovery, comparison of transport/lodging, visa and safety checks, plus the **Travel Planning Agent**. |
+| [`commercial-skills/`](./commercial-skills) | Vendor, supplier, and general commercial/product research and decision support, plus the **Vendor & Commercial Research Agent**. |
+
+## Skills vs. agents
+
+- **Skill files** (e.g. `research-planner.md`, `investment-research.md`) are
+  static prompt templates — copy/paste instructions with no autonomy of
+  their own.
+- **Agent files** (e.g. `investment-research-agent.md`) describe an
+  autonomous, tool-using role built on top of one or more skill files: they
+  plan, search, extract, verify, compare, and loop on their own, only
+  pausing for human approval before any real-world action (booking, buying,
+  trading, contacting a third party, publishing).
+- Each domain folder (finance, tourism, commercial) has exactly one agent
+  file that orchestrates that domain's skill plus the shared
+  `general-skills/`. `general-skills/` intentionally has no agent of its
+  own — it's the shared toolbox every domain agent calls into.
 
 ## How to use a skill file
 
